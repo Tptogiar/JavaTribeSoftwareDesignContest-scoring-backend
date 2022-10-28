@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javatribe.scoreSystem.dao.JudgeMapper">
+    <resultMap id="myMap" type="com.javatribe.scoreSystem.entity.Result">
+        <result column="id" property="teamId"/>
+        <result column="teamName" property="teamName"/>
+        <result column="teamStatus" property="teamStatus"></result>
+        <result column="projectName" property="projectName"></result>
+        <result column="marks" property="mark"/>
+    </resultMap>
+    <select id="noScoreTeam" parameterType="map" resultType="com.javatribe.scoreSystem.entity.Team">
+        SELECT id, teamName, teamStatus, canMark, projectName
+        from team
+        WHERE team.id
+        not IN
+        (
+        select teamId
+        from score
+        where judgeId = #{id}
+        )
+    </select>
+    <select id="hasScoreTeam" parameterType="map" resultMap="myMap">
+        SELECT team.id, teamName, marks, teamStatus, projectName
+        from team,
+        score
+        WHERE teamId = team.id
+        and judgeId = #{id}
+        order by marks desc
+    </select>
+
+    <select id="isMarked" parameterType="com.javatribe.scoreSystem.entity.Score" resultType="Integer">
+        select count(*) from score where judgeId = #{judgeId} and teamId = #{teamId}
+    </select>
+
+    <insert id="insertScore" parameterType="com.javatribe.scoreSystem.entity.Score">
+        insert into score(judgeId, teamId, marks)
+        values (#{judgeId}, #{teamId}, #{marks})
+    </insert>
+
+    <update id="updateScore" parameterType="com.javatribe.scoreSystem.entity.Score">
+        update score
+        set marks = #{marks}
+        where teamId = #{teamId}
+        and judgeId = #{judgeId}
+    </update>
+
+    <update id="updateStatus" parameterType="com.javatribe.scoreSystem.entity.Team">
+        update team
+        set teamStatus = #{teamStatus}
+        where id = #{id}
+    </update>
+
+    <update id="updateCanMark" parameterType="com.javatribe.scoreSystem.entity.Team">
+        update team
+        set canMark = #{canMark}
+        where id = #{id}
+    </update>
+
+    <select id="selectAllTeams" resultType="com.javatribe.scoreSystem.entity.Team">
+        select * from team;
+    </select>
+
+    <select id="selectCanMark" resultType="Long" parameterType="Long">
+        select canMark from team where id = #{id}
+    </select>
+</mapper>
