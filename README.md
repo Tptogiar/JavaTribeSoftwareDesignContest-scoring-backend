@@ -1,0 +1,1 @@
+# JavaTribeSoftwareDesignContest-scoring-backend
