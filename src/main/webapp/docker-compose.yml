@@ -33,7 +33,7 @@ services:
     volumes:
       - ./mysql/:/var/lib/mysql/
     ports:
-      - "3307:3306"
+      - "3005:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     networks:
@@ -51,7 +51,7 @@ services:
     container_name: scoring-tomcat
     image: tomcat:8.5.70
     ports:
-      - 8081:8080
+      - 3004:8080
     volumes:
       - ./war/:/usr/local/tomcat/webapps # 放 war 包
       - ./tomcatlog/:/usr/local/tomcat/logs
@@ -69,8 +69,8 @@ services:
     environment:
       - PRE_CREATE_DB=cadvisor
     ports:
-      - "8083:8083"
-      - "8086:8086"
+      - "3003:8083"
+      - "3002:8086"
     volumes:
       - ./data/influxdb:/data
 
@@ -81,7 +81,7 @@ services:
     command: -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=influxsrv:8086
     restart: always
     ports:
-      - "8080:8080"
+      - "3001:8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
