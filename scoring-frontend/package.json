@@ -1,0 +1,58 @@
+{
+  "name": "score",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve --mode development",
+    "build": "vue-cli-service build --mode production",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "element-ui": "^2.14.0",
+    "i": "^0.3.6",
+    "lib-flexible": "^0.3.2",
+    "postcss-plugin-px2rem": "^0.8.1",
+    "time-localstorage": "^1.0.2",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "vant": "^2.9.3",
+    "vue": "^2.6.11",
+    "vue-axios": "^2.1.5",
+    "vue-router": "^3.2.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.4.0",
+    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-plugin-router": "~4.4.0",
+    "@vue/cli-service": "~4.4.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-import": "^1.13.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "less-loader": "^10.2.0",
+    "node-sass": "^4.12.0",
+    "postcss-px2rem-exclude": "0.0.6",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "postcss-plugin-px2rem": {
+    "rootValue": 75,
+    "unitPrecision": 5,
+    "propBlackList": [
+      "font-size"
+    ],
+    "mediaQuery": false,
+    "minPixelValue": 3
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {},
+      "postcss-px2rem-exclude": {
+        "remUnit": 75,
+        "exclude": "/node_modules|floder_name/i"
+      }
+    }
+  }
+}
