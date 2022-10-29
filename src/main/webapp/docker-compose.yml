@@ -34,6 +34,8 @@ services:
       - ./mysql/:/var/lib/mysql/
     ports:
       - "3005:3306"
+    cap_add:
+      - SYS_NICE
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     networks:
@@ -117,7 +119,7 @@ services:
       - DATA_SOURCE_NAME=root:123456@(mysql:3306)/mark
     networks:
       mynetwork:
-        ipv4_address: 172.19.0.5
+        ipv4_address: 172.19.0.6
 
 
   prometheus:
