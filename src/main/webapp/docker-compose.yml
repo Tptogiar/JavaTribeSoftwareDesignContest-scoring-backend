@@ -115,3 +115,18 @@ services:
       - "9104:9104"
     environment:
       - DATA_SOURCE_NAME=root:123456@(mysql:3306)/database
+
+
+  prometheus:
+    image: bitnami/prometheus:latest
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - ./prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    restart: always
