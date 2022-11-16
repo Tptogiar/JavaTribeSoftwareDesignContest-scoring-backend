@@ -36,14 +36,16 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
 
 
+
   node_exporter:
     image: quay.io/prometheus/node-exporter:latest
     container_name: java-tribe-software-contest-node-exporter
     command:
       - '--path.rootfs=/host'
+    ports:
+      - '9100:9100'
     network_mode: host
     pid: host
-    restart: unless-stopped
+    restart: always
     volumes:
       - '/:/host:ro,rslave'
-
