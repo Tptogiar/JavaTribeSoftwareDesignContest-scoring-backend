@@ -46,8 +46,6 @@ services:
     container_name: java-tribe-software-contest-node-exporter
     command:
       - '--path.rootfs=/host'
-    ports:
-      - '9100:9100'
     network_mode: host
     pid: host
     restart: always
