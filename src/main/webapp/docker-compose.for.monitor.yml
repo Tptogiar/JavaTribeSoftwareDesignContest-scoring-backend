@@ -1,17 +1,17 @@
-version: '3'
+version: '3.8'
 
 services:
   prometheus:
     image: prom/prometheus:v2.18.1
     container_name: java-tribe-software-contest-prometheus
     command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --storage.tsdb.retention=30d
+    user: 0:0
     ports:
       - 9090:9090
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus/prometheus/alerts/:/etc/prometheus/rules.d/
       - ./prometheus/prometheus/data/:/prometheus
-
 
   pushgateway:
     image: prom/pushgateway:v1.4.2
@@ -21,4 +21,20 @@ services:
       - 9091:9091
     volumes:
       - ./prometheus/pushgateway/data:/pushgateway
+
+
+
+  grafana:
+    image: grafana/grafana:7.2.1
+    container_name: java-tribe-software-contest-grafana
+    user: 0:0
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+
+
 
