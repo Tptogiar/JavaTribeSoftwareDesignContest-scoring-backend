@@ -1,5 +1,13 @@
 version: '3.8'
 
+networks:
+  java-tribe-software-contest-network:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+          gateway: 172.19.0.1
+
+
 services:
   prometheus:
     image: prom/prometheus:v2.18.1
@@ -12,6 +20,9 @@ services:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus/prometheus/alerts/:/etc/prometheus/rules.d/
       - ./prometheus/prometheus/data/:/prometheus
+    networks:
+      java-tribe-software-contest-network:
+        ipv4_address: 172.19.0.2
 
   pushgateway:
     image: prom/pushgateway:v1.4.2
@@ -21,7 +32,9 @@ services:
       - 9091:9091
     volumes:
       - ./prometheus/pushgateway/data:/pushgateway
-
+    networks:
+      java-tribe-software-contest-network:
+        ipv4_address: 172.19.0.3
 
 
   grafana:
@@ -34,11 +47,13 @@ services:
       - ./grafana/data:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
-
+    networks:
+      java-tribe-software-contest-network:
+        ipv4_address: 172.19.0.4
 
 
   node_exporter:
-    image: quay.io/prometheus/node-exporter:latest
+    image: prom/node-exporter:v1.3.1
     container_name: java-tribe-software-contest-node-exporter
     command:
       - '--path.rootfs=/host'
@@ -49,3 +64,6 @@ services:
     restart: always
     volumes:
       - '/:/host:ro,rslave'
+    networks:
+      java-tribe-software-contest-network:
+        ipv4_address: 172.19.0.5
