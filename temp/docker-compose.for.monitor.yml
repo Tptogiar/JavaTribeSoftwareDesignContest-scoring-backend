@@ -40,7 +40,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
 
 
-# expoters following
+  # expoters following
 
   node_exporter:
     image: prom/node-exporter:v1.3.1
@@ -54,7 +54,7 @@ services:
       - '/:/host:ro,rslave'
 
   mysqld-exporter:
-    image: prom/mysqld-exporter
+    image: docker.io/bitnami/mysqld-exporter:0
     ports:
       - 9104:9104
     environment:
