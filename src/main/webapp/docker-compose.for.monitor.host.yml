@@ -64,3 +64,5 @@ services:
     image: docker.io/bitnami/nginx-exporter:0
     ports:
       - 9113:9113
+    command:
+      - '-nginx.scrape-uri=http://175.178.7.180:81/stub_status'
