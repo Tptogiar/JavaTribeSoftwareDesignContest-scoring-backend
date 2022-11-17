@@ -5,7 +5,7 @@ version: '3.8'
 
 services:
   prometheus:
-    image: prom/prometheus:v2.18.1
+    image: bitnami/prometheus
     container_name: java-tribe-software-contest-prometheus
     command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --storage.tsdb.retention=30d
     user: 0:0
