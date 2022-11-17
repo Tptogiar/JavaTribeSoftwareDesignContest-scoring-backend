@@ -8,7 +8,7 @@ services:
     image: bitnami/prometheus
     container_name: java-tribe-software-contest-prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml '
+      - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention=30d'
       - '--web.enable-admin-api'
@@ -33,7 +33,7 @@ services:
 
 
   grafana:
-    image: grafana/grafana:7.2.1
+    image: grafana/grafana
     container_name: java-tribe-software-contest-grafana
     user: 0:0
     ports:
