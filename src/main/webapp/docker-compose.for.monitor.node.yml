@@ -7,7 +7,11 @@ services:
   prometheus:
     image: bitnami/prometheus
     container_name: java-tribe-software-contest-prometheus
-    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --storage.tsdb.retention=30d
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml '
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=30d'
+      - '--web.enable-amdin-api'
     user: 0:0
     ports:
       - 9090:9090
@@ -58,7 +62,7 @@ services:
     ports:
       - 9104:9104
     environment:
-      - DATA_SOURCE_NAME='exporter:javatribe@(175.178.7.180:3307)/'
+      - DATA_SOURCE_NAME=exporter:javatribe@(175.178.7.180:3307)/
 
   nginx-exporter:
     image: docker.io/bitnami/nginx-exporter:0
