@@ -40,6 +40,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
 
 
+# expoters following
 
   node_exporter:
     image: prom/node-exporter:v1.3.1
@@ -58,3 +59,8 @@ services:
       - 9104:9104
     environment:
       - DATA_SOURCE_NAME='exporter:javatribe@(175.178.7.180:3307)/'
+
+  nginx-exporter:
+    image: docker.io/bitnami/nginx-exporter:0
+    ports:
+      - 9113:9113
