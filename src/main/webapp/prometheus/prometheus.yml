@@ -16,7 +16,7 @@ scrape_configs:
           name: 'monitor:prometheus'
       - targets: ['8.134.163.132:9100']
         labels:
-          name: 'monitor:node-exporter:'
+          name: 'monitor:node-exporter'
 
 
   - job_name: 'production'
@@ -24,13 +24,13 @@ scrape_configs:
     static_configs:
       - targets: ['175.178.7.180:9000']
         labels:
-          name: 'production:node-exporter:'
+          name: 'production:node-exporter'
       - targets: ['8.134.163.132:9104']
         labels:
-          name: 'production:mysql-exporter:'
+          name: 'production:mysql-exporter'
       - targets: ["8.134.163.132:9113"]
         labels:
-          name: 'production:nginx-exporter:'
+          name: 'production:nginx-exporter'
 
 
 
