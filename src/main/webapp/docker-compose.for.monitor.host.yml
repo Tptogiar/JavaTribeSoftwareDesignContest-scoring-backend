@@ -57,4 +57,4 @@ services:
     ports:
       - 9104:9104
     environment:
-      - DATA_SOURCE_NAME='root:123456@(175.178.7.180:3307)/'
+      - DATA_SOURCE_NAME='exporter:javatribe@(175.178.7.180:3307)/'
