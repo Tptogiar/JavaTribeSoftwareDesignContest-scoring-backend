@@ -11,9 +11,9 @@ scrape_configs:
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
     static_configs:
-      - targets: ['localhost:9090']
-        labels:
-          name: 'monitor:prometheus'
+#      - targets: ['8.134.163.132:9090']
+#        labels:
+#          name: 'monitor:prometheus'
       - targets: ['8.134.163.132:9100']
         labels:
           name: 'monitor:node-exporter'
